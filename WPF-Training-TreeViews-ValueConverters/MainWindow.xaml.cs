@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,11 @@ namespace WPF_Training_TreeViews_ValueConverters
         public MainWindow()
         {
             InitializeComponent();
+
+            foreach(string drive in Directory.GetLogicalDrives())
+            {
+                this.TreeView.Items.Add(drive);
+            }
         }
     }
 }
