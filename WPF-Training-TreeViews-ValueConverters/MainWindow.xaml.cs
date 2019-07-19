@@ -34,6 +34,7 @@ namespace WPF_Training_TreeViews_ValueConverters
 
         private void Item_Expanded(object sender, RoutedEventArgs e)
         {
+            #region Initial Checks
             TreeViewItem item = (TreeViewItem)sender;
 
             // If it doesn't only contain the null item
@@ -41,11 +42,13 @@ namespace WPF_Training_TreeViews_ValueConverters
             {
                 return;
             }
+            
 
             // Remove null item
             item.Items.Clear();
 
             string fullPath = (string)item.Tag;
+            #endregion
 
             #region Get Directories
 
