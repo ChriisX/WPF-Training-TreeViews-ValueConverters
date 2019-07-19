@@ -47,6 +47,8 @@ namespace WPF_Training_TreeViews_ValueConverters
 
             string fullPath = (string)item.Tag;
 
+            #region Get Directories
+
             List<string> directories = new List<string>();
 
             try
@@ -73,6 +75,35 @@ namespace WPF_Training_TreeViews_ValueConverters
 
                 item.Items.Add(subItem);
             });
+
+            #endregion
+
+            #region Get Files
+
+            List<string> files = new List<string>();
+
+            try
+            {
+                string[] fs = Directory.GetFiles(fullPath);
+                if (fs.Length > 0)
+                {
+                    files.AddRange(fs);
+                }
+            }
+            catch { } // Bad practice
+
+            files.ForEach(filePath =>
+            {
+                TreeViewItem subItem = new TreeViewItem()
+                {
+                    Header = GetFileFolderName(filePath),
+                    Tag = filePath
+                };
+
+                item.Items.Add(subItem);
+            });
+
+            #endregion
         }
 
         // Finds the file or folder name from the full path
